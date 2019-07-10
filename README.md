@@ -1,16 +1,12 @@
-# i3-status-wifi
+# i3-status-battery
 
-Show the wifi connection status of your network interface(s).
+Show the battery status of your laptop.
 
 Based on [i3-status-starter](https://github.com/fehmer/i3-status-starter)
 
 ## Block usage:
 ```yml
 blocks:
-  - name: wifi
-    module: i3-status-wifi
-    interface: wlp61s0
-    color: '#00aaDD'
-    show: ['ssid', 'iface', 'security']
-    interval: 1
+  - name: battery
+    module: i3-status-battery
 ```
