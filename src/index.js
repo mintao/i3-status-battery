@@ -9,7 +9,7 @@ export default class Text extends EventEmitter {
     super();
     options = options || {};
     this.output = output || {};
-    this.criticalThreshold = options.criticalThreshold || 18;
+    this.criticalThreshold = options.criticalThreshold || 30;
   }
 
   update() {
@@ -20,7 +20,7 @@ export default class Text extends EventEmitter {
       if (!info.ischarging) {
         msg += ' (' + this.formatMinutes(info.timeremaining) + ')';
       }
-      if (info.percent < this.criticalThreshold) {
+      if (info.timeremaining < this.criticalThreshold) {
         this.output.critical = true;
         this.output.color = '#FF4444';
       }
