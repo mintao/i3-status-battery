@@ -9,33 +9,44 @@ export default class Text extends EventEmitter {
     super();
     options = options || {};
     this.output = output || {};
+    this.chargingColor = options.chargingColor || '#666666';
+    this.dischargingColor = options.dischargingColor || '#AAAA00';
     this.criticalThreshold = options.criticalThreshold || 30;
   }
 
   update() {
-    let msg = '';
-
     systeminfo.battery(info => {
-      msg = info.percent + '%';
-      if (!info.ischarging) {
+      let msg = info.percent + '%';
+      if (!info.ischarging && info.percent !== 100) {
         msg += ' (' + this.formatMinutes(info.timeremaining) + ')';
+        if (info.timeremaining < this.criticalThreshold) {
+          this.output.critical = true;
+        }
       }
-      if (info.timeremaining < this.criticalThreshold) {
-        this.output.critical = true;
-        this.output.color = '#FF4444';
-      }
-    }).catch(err => {
-      this.output.critical = true;
-      msg = err;
-    }).finally(() => {
+
       this.output.full_text = msg;
       this.output.short_text = msg;
+
+      // Color indicating loading status
+      if (info.ischarging === true) {
+        this.changeColor(this.chargingColor);
+      } else {
+        this.changeColor(this.dischargingColor);
+      }
+
+    }).catch(err => {
+      this.output.critical = true;
+      this.output.full_text = err;
+      this.output.short_text = err;
+    }).finally(msg => {
       this.emit('updated', this, this.output);
     })
   }
 
-  action(action) {
-    this.__logger.debug('button pressed on %s:', this.__name, action.button);
+  changeColor(hex) {
+    if (this.output.critical !== true) {
+      this.output.color = hex;
+    }
   }
 
   formatMinutes(min) {
