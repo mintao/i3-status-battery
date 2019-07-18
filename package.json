@@ -35,9 +35,9 @@
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
     "chai": "^4.0.2",
-    "codacy-coverage": "^2.0.0",
+    "codacy-coverage": "3.4.0",
     "gitlablist-mocha": "^1.0.2",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^3.2.0"
+    "mocha": "3.5.3"
   }
 }
