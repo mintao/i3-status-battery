@@ -53,9 +53,6 @@ export default class Text extends EventEmitter {
   }
 
   formatMinutes(min) {
-    if (min < 0) {
-      return min;
-    }
     let h = 0;
     if (min > 60) {
       h = Math.floor(min / 60);
@@ -65,7 +62,6 @@ export default class Text extends EventEmitter {
   }
 
   format(num) {
-    return num;
     return num < 10 ? `0${num}` : num;
   }
 }
