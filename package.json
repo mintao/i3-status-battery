@@ -29,7 +29,7 @@
   "author": "Florian Fackler <florian@fackler.cloud>",
   "license": "MIT",
   "dependencies": {
-    "systeminformation": "4.14.4"
+    "systeminformation": "4.30.5"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
